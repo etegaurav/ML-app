@@ -1,1 +1,1 @@
-web: gunicorn Server_Flask.server:app
+web: gunicorn server:app
