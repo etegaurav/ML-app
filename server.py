@@ -52,7 +52,7 @@ def home():
 @app.route('/get_location_names', methods=['GET'])
 def get_location_names():
     response = jsonify({
-        'locations': util.get_location_names()
+        'locations': get_location_names()
     })
     response.headers.add('Access-Control-Allow-Origin', '*')
 
@@ -78,5 +78,5 @@ def predict_home_price():
 
 if __name__ == "__main__":
     print("Starting Python Flask Server For Home Price Prediction...")
-    util.load_objects()
+    load_objects()
     app.run(debug=True)
