@@ -3,7 +3,7 @@ import pickle
 import numpy as np
 
 app = Flask(__name__)
-__data_columns = ["total_sqft", "bath", "bedrooms", "1st block jayanagar", "1st phase jp nagar",
+__data_columns = {"data_columns":["total_sqft", "bath", "bedrooms", "1st block jayanagar", "1st phase jp nagar",
                   "2nd phase judicial layout", "2nd stage nagarbhavi", "5th block hbr layout", "5th phase jp nagar",
                   "6th phase jp nagar", "7th phase jp nagar", "8th phase jp nagar", "9th phase jp nagar", "aecs layout",
                   "abbigere", "akshaya nagar", "ambalipura", "ambedkar nagar", "amruthahalli", "anandapura",
@@ -44,14 +44,10 @@ __data_columns = ["total_sqft", "bath", "bedrooms", "1st block jayanagar", "1st 
                   "tc palaya", "talaghattapura", "thanisandra", "thigalarapalya", "thubarahalli", "tindlu",
                   "tumkur road", "ulsoor", "uttarahalli", "varthur", "varthur road", "vasanthapura", "vidyaranyapura",
                   "vijayanagar", "vishveshwarya layout", "vishwapriya layout", "vittasandra", "whitefield",
-                  "yelachenahalli", "yelahanka", "yelahanka new town", "yelenahalli", "yeshwanthpur"]
-__location = __data_columns[3:]
+                  "yelachenahalli", "yelahanka", "yelahanka new town", "yelenahalli", "yeshwanthpur"]}
+__location = __data_columns["data_columns"][3:]
 with open('housing_price_predict_model.pickle', 'rb') as f1:
     __model = pickle.load(f1)
-
-
-def get_location_names():
-    return __location
 
 
 def predicted_price(location, sqft, bed, bath):
@@ -76,11 +72,8 @@ def home():
 
 @app.route('/get_location_names', methods=['GET'])
 def get_location_names():
-    response = jsonify({
-        'locations': get_location_names()
-    })
+    response = jsonify({"location":__location})
     response.headers.add('Access-Control-Allow-Origin', '*')
-
     return response
 
 
